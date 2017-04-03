@@ -1,6 +1,6 @@
 import struct
 
-from message_pb2 import Header
+from .message_pb2 import Header
 
 from . import signing
 
@@ -16,6 +16,8 @@ def frame(payload, signer_config=None):
     Frame, optionally sign and return the payload.
 
     """
+    if isinstance(payload, str):
+        payload = payload.encode('utf-8')
     payload_length = len(payload)
     header = Header(message_length=payload_length)
 

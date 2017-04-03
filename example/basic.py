@@ -10,7 +10,7 @@ msg = heka.Message(
 )
 
 payload = msg.encode()
-print repr(payload)
+print(repr(payload))
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.sendto(payload, ('localhost', heka.DEFAULT_PORT))

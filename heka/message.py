@@ -33,7 +33,7 @@ def _set_field_type_and_return_list(field, value):
         field.value_type = Field.BOOL
         field_list = field.value_bool
 
-    elif isinstance(value, basestring):
+    elif isinstance(value, (str,bytes)):
         field.value_type = Field.STRING
         field_list = field.value_string
 
@@ -59,10 +59,10 @@ def _flatten_fields(msg, field_map, prefix=None):
             msg.fields.remove(field)
             _flatten_fields(msg, v, prefix=full_name)
 
-        elif isinstance(v, collections.Iterable) and not isinstance(v, basestring):
+        elif isinstance(v, collections.Iterable) and not isinstance(v, (str,bytes)):
             values = iter(v)
             try:
-                first_value = values.next()
+                first_value = next(values)
             except StopIteration:
                 first_value = None
 
